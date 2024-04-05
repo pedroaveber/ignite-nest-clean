@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  nest-clean:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=nest-clean
+  
+  cache:
+    container_name: nest-clean-cache
+    image: redis
+    ports: 
+      - 6379:6379
+    volumes:
+      - ./data/redis:/data

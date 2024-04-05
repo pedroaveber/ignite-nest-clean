@@ -1,0 +1,42 @@
+@baseURL=http://localhost:3333
+@authToken = {{authenticate.response.body.access_token}}
+
+# @name create_account
+POST {{baseURL}}/accounts
+Content-Type: application/json
+
+{
+  "name": "Pedro Alberto Veber Berna",
+  "email": "pedro.veber10@outlook.com",
+  "password": "Pe991007!"
+}
+
+###
+
+# @name authenticate
+POST {{baseURL}}/sessions
+Content-Type: application/json
+
+{
+  "email": "pedro.veber@outlook.com",
+  "password": "Pe991007!"
+}
+
+###
+
+# @name create_question
+POST {{baseURL}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Nova pergunta teste",
+  "content": "conteudo da pergunta"
+}
+
+###
+
+# @name fetch_recent_questions
+GET {{baseURL}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
